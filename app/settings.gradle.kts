@@ -1,1 +1,1 @@
-rootProject.name = "newrelic"
+rootProject.name = "monitoring"
