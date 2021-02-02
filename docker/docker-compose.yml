@@ -1,0 +1,15 @@
+version: '3.1'
+
+networks:
+  newrelic-network:
+    driver: bridge
+
+services:
+  app:
+    build:
+      context: ../app
+      dockerfile: Dockerfile
+    networks:
+      - newrelic-network
+    ports:
+      - 8080:8080
