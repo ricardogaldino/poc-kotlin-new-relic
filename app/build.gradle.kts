@@ -9,7 +9,7 @@ plugins {
 }
 
 group = "com.newrelic"
-version = "0.0.1-SNAPSHOT"
+version = ""
 java.sourceCompatibility = JavaVersion.VERSION_11
 
 repositories {
@@ -25,7 +25,9 @@ dependencies {
 	implementation("com.newrelic.agent.java", "newrelic-api", "6.4.0")
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
 }
-
+springBoot {
+	mainClass.set("com.newrelic.monitoring.MonitoringApplicationKt")
+}
 tasks.withType<KotlinCompile> {
 	kotlinOptions {
 		freeCompilerArgs = listOf("-Xjsr305=strict")
