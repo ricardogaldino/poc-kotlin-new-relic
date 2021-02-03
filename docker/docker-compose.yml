@@ -11,7 +11,7 @@ services:
       dockerfile: Dockerfile
     environment:
       - NEW_RELIC_APP_NAME=com.newrelic.monitoring
-      - NEW_RELIC_LICENSE_KEY=<<key>>
+      - NEW_RELIC_LICENSE_KEY='<%= license_key %>'
       - NEW_RELIC_LOG_LEVEL=info
       - NEW_RELIC_LOG_FILE_NAME=STDOUT
       - NEW_RELIC_ENV=dev
@@ -19,3 +19,5 @@ services:
       - newrelic-network
     ports:
       - 8080:8080
+
+      
