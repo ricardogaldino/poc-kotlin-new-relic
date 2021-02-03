@@ -13,7 +13,7 @@ common: &default_settings
   # account. For example, if your license key is 12345 use this:
   # license_key: '12345'
   # The key binds your Agent's data to your account in the New Relic service.
-  license_key: '<%= license_key %>'
+  license_key: <<key>>
 
   # Agent Enabled
   # Use this setting to disable the agent instead of removing it from the startup command.
@@ -23,13 +23,13 @@ common: &default_settings
   # Set the name of your application as you'd like it show up in New Relic.
   # If enable_auto_app_naming is false, the agent reports all data to this application.
   # Otherwise, the agent reports only background tasks (transactions for non-web applications)
-  # to this application. To report data to more than one application 
+  # to this application. To report data to more than one application
   # (useful for rollup reporting), separate the application names with ";".
   # For example, to report data to "My Application" and "My Application 2" use this:
   # app_name: My Application;My Application 2
   # This setting is required. Up to 3 different application names can be specified.
   # The first application name must be unique.
-  app_name: My Application
+  app_name: <<app-name>>
 
   # To enable high security, set this property to true. When in high
   # security mode, the agent will use SSL and obfuscated SQL. Additionally,
@@ -77,7 +77,7 @@ common: &default_settings
 
   # The name of the log file.
   # Default is newrelic_agent.log.
-  log_file_name: newrelic_agent.log
+  log_file_name: STDOUT
 
   # The log file directory.
   # Default is the logs directory in the newrelic.jar parent directory.
@@ -95,26 +95,26 @@ common: &default_settings
   #proxy_password: password
   #proxy_scheme: https
 
-  # Limits the number of lines to capture for each stack trace. 
+  # Limits the number of lines to capture for each stack trace.
   # Default is 30
   max_stack_trace_lines: 30
 
   # Provides the ability to configure the attributes sent to New Relic. These
-  # attributes can be found in transaction traces, traced errors, Insight's 
+  # attributes can be found in transaction traces, traced errors, Insight's
   # transaction events, and Insight's page views.
   attributes:
-  
+
     # When true, attributes will be sent to New Relic. The default is true.
     enabled: true
-    
-    #A comma separated list of attribute keys whose values should 
+
+    #A comma separated list of attribute keys whose values should
     # be sent to New Relic.
     #include:
-    
-    # A comma separated list of attribute keys whose values should 
+
+    # A comma separated list of attribute keys whose values should
     # not be sent to New Relic.
     #exclude:
-    
+
 
   # Transaction tracer captures deep information about slow
   # transactions and sends this to the New Relic service once a
@@ -160,7 +160,7 @@ common: &default_settings
     # Default is true.
     explain_enabled: true
 
-    # Threshold for query execution time below which query plans will not 
+    # Threshold for query execution time below which query plans will not
     # not be captured.  Relevant only when `explain_enabled` is true.
     # Default is 0.5 seconds.
     explain_threshold: 0.5
@@ -193,7 +193,7 @@ common: &default_settings
     ignore_status_codes: 404
 
   # Transaction Events are used for Histograms and Percentiles. Unaggregated data is collected
-  # for each web transaction and sent to the server on harvest. 
+  # for each web transaction and sent to the server on harvest.
   transaction_events:
 
     # Set to false to disable transaction events.
@@ -210,7 +210,7 @@ common: &default_settings
   # guide before you enable this feature: https://docs.newrelic.com/docs/apm/distributed-tracing/getting-started/transition-guide-distributed-tracing
   # Default is false.
   distributed_tracing:
-    enabled: false
+    enabled: true
 
   # Cross Application Tracing adds request and response headers to
   # external calls using supported HTTP libraries to provide better
@@ -219,7 +219,7 @@ common: &default_settings
 
     # Set to false to disable cross application tracing.
     # Default is true.
-    enabled: true
+    enabled: false
 
   # Thread profiler measures wall clock time, CPU time, and method call counts
   # in your application's threads as they run.
@@ -233,7 +233,7 @@ common: &default_settings
   # New Relic Real User Monitoring gives you insight into the performance real users are
   # experiencing with your website. This is accomplished by measuring the time it takes for
   # your users' browsers to download and render your web pages by injecting a small amount
-  # of JavaScript code into the header and footer of each page. 
+  # of JavaScript code into the header and footer of each page.
   browser_monitoring:
 
     # By default the agent automatically inserts API calls in compiled JSPs to
@@ -244,7 +244,7 @@ common: &default_settings
     auto_instrument: true
 
   class_transformer:
-    # This instrumentation reports the name of the user principal returned from 
+    # This instrumentation reports the name of the user principal returned from
     # HttpServletRequest.getUserPrincipal() when servlets and filters are invoked.
     com.newrelic.instrumentation.servlet-user:
       enabled: false
@@ -272,8 +272,8 @@ common: &default_settings
   # Names and values may not contain colons (:) or semicolons (;).
   labels:
 
-    # An example label
-    #label_name: label_value
+  # An example label
+  #label_name: label_value
 
 
 # Application Environments
@@ -288,17 +288,11 @@ common: &default_settings
 # NOTE if your application has other named environments, you should
 # provide configuration settings for these environments here.
 
-development:
-  <<: *default_settings
-  app_name: My Application (Development)
-
-test:
-  <<: *default_settings
-  app_name: My Application (Test)
-
-production:
+dev:
   <<: *default_settings
 
-staging:
+hml:
   <<: *default_settings
-  app_name: My Application (Staging)
+
+prd:
+  <<: *default_settings
