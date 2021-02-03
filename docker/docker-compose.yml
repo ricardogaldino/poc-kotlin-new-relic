@@ -9,6 +9,12 @@ services:
     build:
       context: ../app
       dockerfile: Dockerfile
+    environment:
+      - NEW_RELIC_APP_NAME=com.newrelic.monitoring
+      - NEW_RELIC_LICENSE_KEY=<<key>>
+      - NEW_RELIC_LOG_LEVEL=info
+      - NEW_RELIC_LOG_FILE_NAME=STDOUT
+      - NEW_RELIC_ENV=dev
     networks:
       - newrelic-network
     ports:
